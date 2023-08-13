@@ -2,6 +2,8 @@
 
 require_once 'Animals/Cat.php';
 require_once 'Animals/Dog.php';
+require_once 'Animals/Cow.php';
+require_once 'Animals/Unicorn.php';
 
 /**
  * @param string $animalType The type of animal
@@ -11,9 +13,11 @@ require_once 'Animals/Dog.php';
  * @throws Exception Unknown animal type
  */
 function getAnimal(string $animalType, string $name): Animal {
-    return match ($animalType) {
+    return match (strtolower($animalType)) {
         'cat' => new Cat($name),
         'dog' => new Dog($name),
+        'cow' => new Cow($name),
+        'unicorn' => new Unicorn($name),
         default => throw new Exception('Unknown animal type'),
     };
 }

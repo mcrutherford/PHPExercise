@@ -3,7 +3,7 @@
 require_once __DIR__.'/Animal.php';
 
 /*
- * A dog class that says 'Woof!'
+ * A cow class that says 'moo'
  */
 class Cow extends Animal {
     public function __construct(string $name) {
