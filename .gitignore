@@ -79,4 +79,5 @@ fabric.properties
 
 # User added ignore
 .idea/*
-
+vendor/*
+.phpunit.result.cache
