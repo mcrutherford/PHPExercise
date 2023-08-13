@@ -7,6 +7,8 @@ require_once 'Animals/Cow.php';
 require_once 'Animals/Unicorn.php';
 
 /**
+ * Get an animal object from a type and name
+ *
  * @param string $animalType The type of animal
  * @param string $name       The name of the animal
  *
@@ -24,6 +26,8 @@ function getAnimal(string $animalType, string $name): Animal {
 }
 
 /**
+ * Generate a message for what the animal says
+ *
  * @param string $animalType The type of animal
  * @param string $name       The name of the animal
  *
@@ -43,14 +47,42 @@ function generateMessage(string $animalType, string $name): string {
     return "$animalName says '$animalSound'";
 }
 
-if (isset($argv)) {
-    // Retrieve CLI arguments
-    $name = $argv[1];
-    $animalType = $argv[2];
-} else {
-    $name = 'skittles';
-    $animalType = 'cat';
+/**
+ * Retrieve arguments from apache or cli
+ * @throws Exception
+ */
+function getArguments(): array{
+    global $argv;
+    // Retrieve arguments from CLI or apache based on how the script was run
+    if (php_sapi_name() == 'cli') {
+        // Make sure arguments exist
+        if (sizeof($argv) != 3) {
+            throw new Exception('Incorrect arguments.\nUsage: php src/index.php [name] [type]');
+        }
+        // Retrieve CLI arguments
+        $name = $argv[1];
+        $animalType = $argv[2];
+    } else {
+        // Make sure arguments exist
+        if (empty($_GET['name'])) {
+            throw new Exception('Missing required parameter: name');
+        }
+        if (empty($_GET['type'])) {
+            throw new Exception('Missing required parameter: type');
+        }
+
+        // Retrieve apache arguments
+        $name = $_GET['name'];
+        $animalType = $_GET['type'];
+    }
+    return [$animalType, $name];
 }
 
-// Echo the animal speaking string
-echo generateMessage($animalType, $name)."\n";
+try {
+    [$animalType, $name] = getArguments();
+
+    // Echo the animal speaking string
+    echo generateMessage($animalType, $name)."\n";
+} catch (Exception $e) {
+    echo $e->getMessage();
+}
