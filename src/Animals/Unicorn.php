@@ -7,7 +7,10 @@ require_once __DIR__.'/Animal.php';
  */
 class Unicorn extends Animal {
     public function __construct(string $name) {
-        $this->sound = 'Unicorns are not real!';
         parent::__construct($name);
+    }
+
+    public function speak(): string {
+        return 'Unicorns are not real!';
     }
 }

@@ -41,23 +41,22 @@ function generateMessage(string $animalType, string $name): string {
         return "Unknown animal type";
     }
 
-    // Build the return string
-    $animalName = $animal->getName();
-    $animalSound = $animal->getSound();
-    return "$animalName says '$animalSound'";
+    // Get the animal speaking
+    return $animal->speak();
 }
 
 /**
  * Retrieve arguments from apache or cli
- * @throws Exception
+ *
+ * @throws Exception Missing a required parameter
  */
-function getArguments(): array{
+function getArguments(): array {
     global $argv;
     // Retrieve arguments from CLI or apache based on how the script was run
     if (php_sapi_name() == 'cli') {
         // Make sure arguments exist
         if (sizeof($argv) != 3) {
-            throw new Exception('Incorrect arguments.\nUsage: php src/index.php [name] [type]');
+            throw new Exception("Incorrect arguments.\nUsage: php src/index.php [name] [type]");
         }
         // Retrieve CLI arguments
         $name = $argv[1];
@@ -84,5 +83,5 @@ try {
     // Echo the animal speaking string
     echo generateMessage($animalType, $name)."\n";
 } catch (Exception $e) {
-    echo $e->getMessage();
+    echo $e->getMessage()."\n";
 }
