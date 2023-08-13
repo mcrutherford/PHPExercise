@@ -43,9 +43,14 @@ function generateMessage(string $animalType, string $name): string {
     return "$animalName says '$animalSound'";
 }
 
-// Retrieve CLI arguments
-$name = $argv[1];
-$animalType = $argv[2];
+if (isset($argv)) {
+    // Retrieve CLI arguments
+    $name = $argv[1];
+    $animalType = $argv[2];
+} else {
+    $name = 'skittles';
+    $animalType = 'cat';
+}
 
 // Echo the animal speaking string
 echo generateMessage($animalType, $name)."\n";
