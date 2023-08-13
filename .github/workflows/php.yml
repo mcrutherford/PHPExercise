@@ -1,0 +1,40 @@
+name: PHP
+
+# Controls when the workflow will run
+on:
+# Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a job called "php_tests"
+  php_tests:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    - name: Set environment variables
+      id: set_env
+      run: |
+          echo 'ACTIONS_ALLOW_UNSECURE_COMMANDS=true' >> $GITHUB_ENV
+    - uses: actions/checkout@v2
+
+    - name: Setup PHP Action
+      uses: shivammathur/setup-php@2.19.1
+      with:
+        php-version: '8.1'
+        tools: php-cs-fixer:3.22.0, phpunit:10.1, composer:2.5.8
+        extensions: mbstring
+
+    - name: Install dependencies
+      run: composer install --prefer-dist --no-progress --no-suggest
+
+    - name: Run test suite
+      run: ./html/d/vendor/bin/phpunit --verbose --debug --colors=auto tests/
