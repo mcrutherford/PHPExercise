@@ -82,3 +82,4 @@ fabric.properties
 vendor
 .phpunit.result.cache
 tools/php-cs-fixer/vendor
+.php-cs-fixer.cache
