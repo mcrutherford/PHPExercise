@@ -1,16 +1,16 @@
 <?php
 
-require_once __DIR__.'/Animal.php';
+require_once __DIR__.'/Animal.inc.php';
 
 /*
- * A cow class that says 'moo'
+ * A cat class that says 'meow'
  */
-class Cow extends Animal {
+class Cat extends Animal {
     public function __construct(string $name) {
         parent::__construct($name);
     }
 
     public function speak(): string {
-        return $this->getName().' says "Moo"';
+        return $this->getName().' says "meow"';
     }
 }

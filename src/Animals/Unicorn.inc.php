@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__.'/Animal.php';
+require_once __DIR__.'/Animal.inc.php';
 
 /*
  * A unicorn class that says that they are not real

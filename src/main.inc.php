@@ -1,10 +1,10 @@
 <?php
 
 // Require animal classes
-require_once 'Animals/Cat.php';
-require_once 'Animals/Dog.php';
-require_once 'Animals/Cow.php';
-require_once 'Animals/Unicorn.php';
+require_once 'Animals/Cat.inc.php';
+require_once 'Animals/Dog.inc.php';
+require_once 'Animals/Cow.inc.php';
+require_once 'Animals/Unicorn.inc.php';
 
 /**
  * Get an animal object from a type and name
