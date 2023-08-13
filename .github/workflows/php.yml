@@ -24,7 +24,7 @@ jobs:
 #      id: set_env
 #      run: |
 #          echo 'ACTIONS_ALLOW_UNSECURE_COMMANDS=true' >> $GITHUB_ENV
-#    - uses: actions/checkout@v2
+    - uses: actions/checkout@v2
 
     - name: Setup PHP Action
       uses: shivammathur/setup-php@2.19.1
@@ -38,3 +38,53 @@ jobs:
 
     - name: Run test suite
       run: ./vendor/bin/phpunit tests/
+
+  php_stan:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: Set environment variables
+        id: set_env
+        run: |
+          echo 'ACTIONS_ALLOW_UNSECURE_COMMANDS=true' >> $GITHUB_ENV
+      - uses: actions/checkout@v2
+
+      - name: Setup cache environment
+        id: extcache
+        uses: shivammathur/cache-extensions@v1
+        with:
+          php-version: '8.1'
+          key: php-ci-cache-v1
+          extensions: mbstring
+
+      - name: Cache extensions
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.extcache.outputs.dir }}
+          key: ${{ steps.extcache.outputs.key }}
+          restore-keys: ${{ steps.extcache.outputs.key }}
+
+      - name: Setup PHP Action
+        uses: shivammathur/setup-php@2.19.1
+        with:
+          php-version: '8.1'
+          tools: phpstan:1.8.2, composer:2.2.9
+
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress
+
+      - name: Run PHP Stan
+        run: shopt -s globstar; phpstan analyse --memory-limit 1G  -c phpstan.neon html/d/api/**/*.php html/d/inc/**/*.inc html/d/hooks bin/**/*.php html/*.php
