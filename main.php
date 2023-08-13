@@ -1,5 +1,6 @@
 <?php
 
+// Require animal classes
 require_once 'Animals/Cat.php';
 require_once 'Animals/Dog.php';
 require_once 'Animals/Cow.php';
@@ -33,13 +34,13 @@ function generateMessage(string $animalType, string $name): string {
     try {
         $animal = getAnimal($animalType, $name);
     } catch (Exception) {
-        return "Unknown animal type\n";
+        return "Unknown animal type";
     }
 
     // Build the return string
     $animalName = $animal->getName();
     $animalSound = $animal->getSound();
-    return "$animalName says '$animalSound'\n";
+    return "$animalName says '$animalSound'";
 }
 
 // Retrieve CLI arguments
@@ -47,4 +48,4 @@ $name = $argv[1];
 $animalType = $argv[2];
 
 // Echo the animal speaking string
-echo generateMessage($animalType, $name);
+echo generateMessage($animalType, $name)."\n";
