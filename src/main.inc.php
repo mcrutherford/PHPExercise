@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__.'/../vendor/autoload.php';
 
 // Require animal classes
 require_once 'Animals/Cat.inc.php';
@@ -48,6 +49,7 @@ function generateMessage(string $animalType, string $name): string {
 /**
  * Retrieve arguments from apache or cli
  *
+ * @return array<string> The name and animal type
  * @throws Exception Missing a required parameter
  */
 function getArguments(): array {
