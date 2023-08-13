@@ -1,6 +1,8 @@
 <?php
 
-// This is the Animal class that serves as the base class for different types of animals.
+/*
+ * This is the Animal class that serves as the base class for different types of animals.
+ */
 class Animal {
     protected string $name;
     protected string $sound;
