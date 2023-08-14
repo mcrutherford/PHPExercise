@@ -19,6 +19,10 @@ class AnimalTest extends TestCase {
     $this->assertEquals('Unicorns are not real!', generateMessage('unicorn', 'Rainbow'));
   }
 
+  public function testDuckSpeak(): void {
+    $this->assertEquals('Daffy says "QUACK"', generateMessage('duck', 'Daffy'));
+  }
+
   public function testUnknownAnimalType(): void {
     $this->assertEquals('Unknown animal type', generateMessage('dragon', 'Smaug'));
   }

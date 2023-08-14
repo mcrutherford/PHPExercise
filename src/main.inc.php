@@ -6,6 +6,7 @@ require_once 'Animals/Cat.inc.php';
 require_once 'Animals/Dog.inc.php';
 require_once 'Animals/Cow.inc.php';
 require_once 'Animals/Unicorn.inc.php';
+require_once 'Animals/Duck.inc.php';
 
 /**
  * Get an animal object from a type and name
@@ -22,6 +23,7 @@ function getAnimal(string $animalType, string $name): Animal {
         'dog' => new Dog($name),
         'cow' => new Cow($name),
         'unicorn' => new Unicorn($name),
+        'duck' => new Duck($name),
         default => throw new Exception('Unknown animal type'),
     };
 }
