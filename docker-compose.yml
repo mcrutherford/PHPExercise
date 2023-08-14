@@ -1,8 +1,8 @@
-version: '3'
+version: "3.3"
 services:
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+  php-exercise:
+    image: ghcr.io/mcrutherford/phpexercise:master
+    container_name: php-exercise
+    restart: unless-stopped
     ports:
       - "8080:80"

@@ -1,5 +1,4 @@
 <?php
-require_once __DIR__.'/../vendor/autoload.php';
 
 // Require animal classes
 require_once 'Animals/Cat.inc.php';
