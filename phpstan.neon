@@ -1,4 +1,6 @@
 parameters:
+    excludePaths:
+        - .php-cs-fixer.php
 
     level: 9
 

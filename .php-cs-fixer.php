@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__.'/tools/phpstan/vendor/autoload.php';
 
 $config = new PhpCsFixer\Config();
 $config->setRules([
@@ -42,7 +43,6 @@ $config->setRules([
     'trim_array_spaces' => true,
     'unary_operator_spaces' => true,
     'whitespace_after_comma_in_array' => true,
-    'combine_consecutive_unsets' => false,
 ])->setLineEnding("\n");
 
 $finder = new PhpCsFixer\Finder();
