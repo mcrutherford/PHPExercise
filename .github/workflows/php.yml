@@ -50,7 +50,7 @@ jobs:
         tools: php-cs-fixer:3.9
 
     - name: Run PHP CS Fixer
-      run: php-cs-fixer fix --dry-run --config='.php-cs-fixer.php' -- src/
+      run: php-cs-fixer fix --dry-run --config='.php-cs-fixer.php' --using-cache=no
 
   php_stan:
     # The type of runner that the job will run on

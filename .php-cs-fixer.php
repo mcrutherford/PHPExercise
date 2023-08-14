@@ -1,9 +1,7 @@
 <?php
-require_once __DIR__.'/tools/phpstan/vendor/autoload.php';
 
 $config = new PhpCsFixer\Config();
 $config->setRules([
-    '@PSR2' => true,
     'indentation_type' => true,
     'array_indentation' => true,
     'array_syntax' => ['syntax' => 'short'],
@@ -19,7 +17,7 @@ $config->setRules([
     'concat_space' => ['spacing' => 'none'],
     'declare_equal_normalize' => true,
     'function_typehint_space' => true,
-    'single_line_comment_style' => true,
+//    'single_line_comment_style' => true,
     'include' => true,
     'lowercase_cast' => true,
     'no_extra_blank_lines' => [
@@ -51,7 +49,12 @@ $finder->exclude(
     [
         'vendor/',
     ]
-)->in([]);
+)->in(
+    [
+        __DIR__.'/src',
+        __DIR__.'/tests',
+    ]
+);
 
 $config->setFinder($finder);
 
