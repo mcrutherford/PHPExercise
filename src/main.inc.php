@@ -41,7 +41,7 @@ function generateMessage(string $animalType, string $name): string {
     try {
         $animal = getAnimal($animalType, $name);
     } catch (Exception) {
-        return "Unknown animal type";
+        return 'Unknown animal type';
     }
 
     // Get the animal speaking
