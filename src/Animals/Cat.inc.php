@@ -11,6 +11,6 @@ class Cat extends Animal {
     }
 
     public function speak(): string {
-        return $this->getName().' says "meow"';
+        return $this->getName().' says "WOOF"';
     }
 }
